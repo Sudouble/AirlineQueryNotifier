@@ -4,6 +4,9 @@ from QueryFeizhu import QueryFeizhu
 from QueryCtrip import CtripAir
 from TickFilter import TickFilter
 from prettytable import PrettyTable
+from EmailSender import EmailSender
+
+receiver = ["xxx@163.com"]
 
 def pretty_air(tickets):
     header = '航班型号 起飞日期 航空公司 起飞机场 起飞时间 降落机场 降落时间 最低价格'.split()
@@ -12,20 +15,29 @@ def pretty_air(tickets):
     try:
         for ticket in tickets:
             pt.add_row(ticket.values())
-        print(pt)
         return pt
     except TypeError:
         pass
 
 if __name__ == '__main__':
     dcity = '北京'
-    acity = '上海'
-    date = '2019-05-01'
-    air_tickets = CtripAir(dcity, acity, date)()
-    # pretty_air(air_tickets)
+    acity = '杭州'
+    date = '2019-10-02'
 
-    filtered = TickFilter(air_tickets, 800).filter()
-    pretty_air(filtered)
+    last_message = ''
+
+    air_tickets = CtripAir(dcity, acity, date)()
+    # print pretty_air(air_tickets)
+    #
+    # filtered = TickFilter(air_tickets, 900).filter()
+    #
+    # if filtered != last_message:
+    #     email_sender = EmailSender(receiver)
+    #
+    #     msg = pretty_air(filtered)
+    #     email_sender.send_email(msg.get_string())
+    #
+    # last_message = filtered
 
 # if __name__ == '__main__':
 #     dep_city = "北京"

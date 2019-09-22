@@ -63,7 +63,7 @@ class CtripAir():
                 return route_list
                 print('网页信息貌似不对哦')
         except Exception as e:
-            print(e)
+            print(e), ' Error'
 
     # 解析机票信息
     def parse(self, route_list):
